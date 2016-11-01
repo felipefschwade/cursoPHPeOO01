@@ -2,6 +2,8 @@
 require_once("cabecalho.php");
 require_once("banco-produto.php");
 
+verificaUsuario();
+
 $id = $_POST['id'];
 $nome = $_POST['nome'];
 $preco = $_POST['preco'];
