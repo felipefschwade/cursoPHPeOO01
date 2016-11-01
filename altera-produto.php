@@ -1,29 +1,30 @@
 <?php
 require_once("cabecalho.php");
 require_once("banco-produto.php");
+require_once("class/Produto.php");
 
-verificaUsuario();
+$Produto = new Produto();
 
-$id = $_POST['id'];
-$nome = $_POST['nome'];
-$preco = $_POST['preco'];
-$descricao = $_POST['descricao'];
+$Produto->id = $_POST['id'];
+$Produto->nome = $_POST['nome'];
+$Produto->preco = $_POST['preco'];
+$Produto->descricao = $_POST['descricao'];
 
 if(array_key_exists('usado', $_POST)) {
-	$usado = "true";
+	$Produto->usado = "true";
 } else {
-	$usado = "false";
+	$Produto->usado = "false";
 }
 
-$categoria_id = $_POST['categoria_id'];
+$Produto->categoria_id = $_POST['categoria_id'];
 
-if(alteraProduto($conexao, $id, $nome, $preco, $descricao, $usado, $categoria_id)) { ?>
-	<p class="text-success">O produto <?= $nome ?>, <?= $preco ?> foi alterado.</p>
+if(alteraProduto($conexao, $Produto)) { ?>
+	<p class="text-success">O produto <?= $Produto->nome ?>, <?= $Produto->preco ?> foi alterado.</p>
 <?php 
 } else {
 	$msg = mysqli_error($conexao);
 ?>
-	<p class="text-danger">O produto <?= $nome ?> não foi alterado: <?= $msg?></p>
+	<p class="text-danger">O produto <?= $Produto->nome ?> não foi alterado: <?= $msg?></p>
 <?php
 }
 ?>
