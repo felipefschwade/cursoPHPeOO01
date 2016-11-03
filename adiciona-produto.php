@@ -2,8 +2,11 @@
 require_once("cabecalho.php");
 require_once("banco-produto.php");
 require_once("class/Produto.php");
+require_once("class/Categoria.php");
 
 $Produto = new Produto();
+$categoria = new Categoria();
+
 
 $Produto->nome = $_POST['nome'];
 $Produto->preco = $_POST['preco'];
@@ -15,7 +18,9 @@ if(array_key_exists('usado', $_POST)) {
 	$Produto->usado = "false";
 }
 
-$Produto->categoria_id = $_POST['categoria_id'];
+$categoria->id = $_POST['categoria_id'];
+
+$Produto->categoria = $categoria;;
 
 if(insereProduto($conexao, $Produto)) { ?>
 	<p class="text-success">O produto <?= $Produto->nome ?>, <?= $Produto->preco ?> foi adicionado.</p>
