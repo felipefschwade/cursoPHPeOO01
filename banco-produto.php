@@ -21,7 +21,6 @@ function listaProdutos($conexao) {
         $produto->usado = $produto_array["usado"];
 
 		array_push($produtos, $produto);
-		var_dump($produto);
 	}
 	return $produtos;
 }
